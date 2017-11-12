@@ -11,7 +11,9 @@ import java.util.HashSet;
 
 public class LanguageLearnerTest {
 
+    //<editor-fold desc="Ad Hoc List">
     private final String[] AD_HOC_LIST = {
+            "alex",
             "balor",
             "balon",
             "bilor",
@@ -21,7 +23,12 @@ public class LanguageLearnerTest {
             "dontrok",
             "ifrit",
             "grognar",
+            "gruumsh",
+            "luthic",
+            "orog",
+            "obould",
     };
+    //</editor-fold>
 
     @Test
     public void levelTest() {

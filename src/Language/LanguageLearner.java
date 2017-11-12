@@ -24,6 +24,7 @@ public class LanguageLearner {
     public LanguageLearner() {
     }
 
+    //TODO: FIX BUG WITH "'"
     public String process(String input, final int level, final Set<String> adHocWords) throws IOException {
         StringBuilder output = new StringBuilder();
         Set<String> languageSet = getLanguageLevelArray(level);
@@ -31,7 +32,9 @@ public class LanguageLearner {
         String[] parsed = fixNewlines(input).split(" +|(?=\\p{Punct})|(?<=\\p{Punct})");
         for (String word : parsed) {
             String curr = word.toLowerCase();
-            if (usedSet.contains(curr) || isNewline(curr)) {
+            if (curr.length() == 1 && !isNumber(curr) && !isPunctuation(curr)) {
+                output.append(word);
+            } else if (usedSet.contains(curr) || isNewline(curr)) {
                 output.append(word);
             } else if (isPunctuation(curr)) {
                 fixPunctuation(output, curr);
@@ -88,7 +91,8 @@ public class LanguageLearner {
     private String fixNewlines(String input) {
         return input.replaceAll("\n", " \n ")
                 .replaceAll("\r", " \r ")
-                .replaceAll("\t", " \t ");
+                .replaceAll("\t", " \t ")
+                .replaceAll("'", " ' "); // Hacky conjunction "fix", not a newline ><
     }
 
     private boolean isPunctuation(String input) {
@@ -96,7 +100,7 @@ public class LanguageLearner {
     }
 
     private void fixPunctuation(StringBuilder output, String curr) {
-        if (output.length() > 1) {
+        if (Pattern.matches("[!.,;:'?]", curr) && output.length() > 1) {
             output.deleteCharAt(output.length() - 1);
         }
         output.append(curr);
@@ -116,6 +120,9 @@ public class LanguageLearner {
                 if (combinedSet.contains(trimmed)) return true;
                 // Catches some edge conjugation case (i.e. involve -> involving)
                 trimmed = input.substring(0, input.length() - conj.length()) + 'e';
+                if (combinedSet.contains(trimmed)) return true;
+                // Catches some edge conjugation case (i.e. enemy -> enemies)
+                trimmed = input.substring(0, input.length() - conj.length()) + 'y';
                 if (combinedSet.contains(trimmed)) return true;
             }
         }
