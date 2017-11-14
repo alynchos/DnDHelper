@@ -1,12 +1,19 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.VBox?>
 <VBox fx:controller="Controllers.LauncherController"
-      xmlns:fx="http://javafx.com/fxml">
-    <Label text="Language Input"/>
-    <TextField fx:id="input" onKeyPressed="#textFieldPressed"/>
+      xmlns:fx="http://javafx.com/fxml"
+      prefHeight="Infinity">
+    <Label fx:id="languageSelectLabel" text="No file selected"/>
+    <Button fx:id="select" text="Select File" onAction="#selectInputFile"/>
     <Label text="Level (1-6)"/>
     <TextField fx:id="levelText" onKeyPressed="#textFieldPressed"/>
     <Button fx:id="button" text="Generate" onAction="#generate"/>
     <Label text="Redacted Output"/>
-    <TextField fx:id="outputText" />
+    <TextArea
+            fx:id="outputText"
+            maxWidth="Infinity"
+            prefWidth="Infinity"
+            maxHeight="Infinity"
+            prefHeight="500"
+            wrapText="true"/>
 </VBox>
