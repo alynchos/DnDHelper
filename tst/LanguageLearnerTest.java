@@ -26,7 +26,9 @@ public class LanguageLearnerTest {
             "gruumsh",
             "luthic",
             "orog",
+            "owlbear",
             "obould",
+            "otyugh",
     };
     //</editor-fold>
 
@@ -36,7 +38,7 @@ public class LanguageLearnerTest {
         Path inputFile = Paths.get("/Users/alexly/Documents/languageLearnerTest1");
         try {
             String input = new String(Files.readAllBytes(inputFile));
-            for (int i = 1; i < 7; i++) {
+            for (int i = 6; i < 7; i++) {
                 String output = learner.process(input, i, new HashSet<>(Arrays.asList(AD_HOC_LIST)));
                 System.out.println(String.format("LEVEL %d: %s", i, output));
             }

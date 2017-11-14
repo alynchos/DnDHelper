@@ -1,5 +1,7 @@
 package Language;
 
+import Constants.LanguageConstants;
+
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Set;
@@ -19,7 +21,7 @@ import java.util.stream.Stream;
  */
 public class LanguageLearner {
 
-    private final char REDACT_CHAR = '-';
+    private static final char REDACT_CHAR = '-';
 
     public LanguageLearner() {
     }
@@ -40,7 +42,7 @@ public class LanguageLearner {
                 fixPunctuation(output, curr);
             } else if (level >= 5 && isNumber(curr)) {
                 output.append(word);
-            } else if (level >= 4 && canConjugate(curr, usedSet, adHocWords)) {
+            } else if (level >= 4 && canConjugate(curr, usedSet)) {
                 output.append(word);
             } else {
                 output.append(redact(curr));
@@ -107,23 +109,22 @@ public class LanguageLearner {
     }
 
     // This doe not catch every single conjugation, but a vast majority, like if you were learning a language!
-    private boolean canConjugate(String input, Set<String> languageSet, Set<String> adHocWords) {
-        Set<String> combinedSet = Stream.concat(languageSet.stream(), adHocWords.stream()).collect(Collectors.toSet());
+    private boolean canConjugate(String input, Set<String> usedSet) {
         for (String conj : LanguageConstants.CONJUGATIONS) {
             if (input.endsWith(conj)) {
                 // Catches normal conjugation case (i.e. dog -> dogs)
                 String trimmed = input.substring(0, input.length() - conj.length());
-                if (combinedSet.contains(trimmed)) return true;
+                if (usedSet.contains(trimmed)) return true;
                 if (input.length() <= conj.length()) continue;
                 // Catches semi-normal conjugation case (i.e. run -> running)
                 trimmed = input.substring(0, input.length() - conj.length() - 1);
-                if (combinedSet.contains(trimmed)) return true;
+                if (usedSet.contains(trimmed)) return true;
                 // Catches some edge conjugation case (i.e. involve -> involving)
                 trimmed = input.substring(0, input.length() - conj.length()) + 'e';
-                if (combinedSet.contains(trimmed)) return true;
+                if (usedSet.contains(trimmed)) return true;
                 // Catches some edge conjugation case (i.e. enemy -> enemies)
                 trimmed = input.substring(0, input.length() - conj.length()) + 'y';
-                if (combinedSet.contains(trimmed)) return true;
+                if (usedSet.contains(trimmed)) return true;
             }
         }
         return false;

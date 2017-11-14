@@ -1,0 +1,12 @@
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.VBox?>
+<VBox fx:controller="Controllers.LauncherController"
+      xmlns:fx="http://javafx.com/fxml">
+    <Label text="Language Input"/>
+    <TextField fx:id="input" onKeyPressed="#textFieldPressed"/>
+    <Label text="Level (1-6)"/>
+    <TextField fx:id="levelText" onKeyPressed="#textFieldPressed"/>
+    <Button fx:id="button" text="Generate" onAction="#generate"/>
+    <Label text="Redacted Output"/>
+    <TextField fx:id="outputText" />
+</VBox>
