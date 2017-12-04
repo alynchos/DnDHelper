@@ -76,7 +76,7 @@ public class LauncherController {
             default:
                 throw new IOException("The input was unable to be located!");
         }
-        
+
         lastUsedInput = input;
 
         // Retrieve the Ad Hoc List
@@ -115,7 +115,7 @@ public class LauncherController {
     private HashSet<String> getAdHocList() throws IOException {
         HashSet<String> adHocList = new HashSet<>();
         if (selectedAdHocFile == null) return adHocList;
-        String[] input = new String(Files.readAllBytes(selectedAdHocFile.toPath())).split(",");
+        String[] input = new String(Files.readAllBytes(selectedAdHocFile.toPath())).split("\\s+");
         for (String s : input) {
             adHocList.add(s);
         }
