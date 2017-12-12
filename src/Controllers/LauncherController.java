@@ -117,7 +117,7 @@ public class LauncherController {
         if (selectedAdHocFile == null) return adHocList;
         String[] input = new String(Files.readAllBytes(selectedAdHocFile.toPath())).split("\\s+");
         for (String s : input) {
-            adHocList.add(s);
+            adHocList.add(s.toLowerCase());
         }
         return adHocList;
     }

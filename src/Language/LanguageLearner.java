@@ -108,7 +108,7 @@ public class LanguageLearner {
         output.append(curr);
     }
 
-    // This doe not catch every single conjugation, but a vast majority, like if you were learning a language!
+    // This does not catch every single conjugation, but a vast majority, like if you were learning a language!
     private boolean canConjugate(String input, Set<String> usedSet) {
         for (String conj : LanguageConstants.CONJUGATIONS) {
             if (input.endsWith(conj)) {

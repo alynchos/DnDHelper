@@ -375,6 +375,7 @@ public class LanguageConstants {
             "dodge",
             "dog",
             "donkey",
+            "dragon",
             "drow",
             "druid",
             "ear",
@@ -402,6 +403,7 @@ public class LanguageConstants {
             "forest",
             "fork",
             "forward",
+            "fox",
             "freedom",
             "fun",
             "garbage",
@@ -661,6 +663,7 @@ public class LanguageConstants {
     private static final String[] BASIC_VERB_LIST = {
             "am",
             "prey",
+            "jump",
             "size",
             "care",
             "search",
